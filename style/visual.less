@@ -1,9 +1,79 @@
 p {
+    padding-left: 10px;
     font-size: 20px;
-    font-weight: bold;
+    font-weight: semi-bold;
+    font-family: Arial, Helvetica, sans-serif;
+    color: #352f36;
     em {
-        background: yellow;
         padding: 5px;
         
     }
+}
+
+input[type="text"] {
+    margin-right: 10px;
+    border: 2px solid #6495ed;
+    border-radius: 4px;
+    background-color: #f8f8f8;
+    font-size: 18px;
+    transition: border-color 0.3s ease-in-out;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: semi-bold;
+}
+
+input[type="text"]:focus {
+    border-color: #00009c;
+    outline: none;
+    background-color: #fff;
+}
+
+button {
+    width: 100px;
+    background-color: #6495ed;
+    border: none;
+    color: white;
+    padding: 5px 5px;
+    text-align: center;
+    font-size: 17px;
+    cursor: pointer;
+    border-radius: 8px;
+    transition: background-color 0.3s ease-in-out;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: semi-bold;
+}
+
+button:hover {
+    background-color: #00009c;
+}
+
+#statusButton {
+    width: 340px !important;
+}
+
+.errorMessage {
+    position: relative;
+    color: #D8000C;
+    background-color: #FFD2D2;
+    border: 1px solid #D8000C;
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 5px;
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+}
+
+.closeBtn {
+    width: auto;
+    position: absolute;
+    top: 0;
+    right: 0;
+    background: none;
+    border: none;
+    font-size: 16px;
+    cursor: pointer;
+    color: #721c24;
+}
+
+.closeBtn:hover {
+    background-color: #FFD2D2;
 }

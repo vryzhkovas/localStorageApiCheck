@@ -1,1 +1,26 @@
-{"visual":{"name":"localStorageApiCheck","displayName":"LocalStorageApiCheck","guid":"localStorageApiCheckD4E447D82A0B4BE18EAFC5F8F5D5DC33","visualClassName":"Visual","version":"1.0.0.0","description":"","supportUrl":"","gitHubUrl":""},"apiVersion":"5.3.0","author":{"name":"","email":""},"assets":{"icon":"assets/icon.png"},"externalJS":null,"style":"style/visual.less","capabilities":"capabilities.json","dependencies":null,"stringResources":[],"version":"1.0.0.0"}
+{
+    "visual": {
+        "name": "localStorageApiCheck",
+        "displayName": "LocalStorageApiCheck",
+        "guid": "localStorageApiCheckD4E447D82A0B4BE18EAFC5F8F5D5DC33",
+        "visualClassName": "Visual",
+        "version": "1.0.0.0",
+        "description": "Visual to check local storage api V2",
+        "supportUrl": "*",
+        "gitHubUrl": ""
+    },
+    "apiVersion": "5.8.0",
+    "author": {
+        "name": "Svetlana Ryzhkova",
+        "email": "v-ryzhkovas@microsoft.com"
+    },
+    "assets": {
+        "icon": "assets/icon.png"
+    },
+    "externalJS": null,
+    "style": "style/visual.less",
+    "capabilities": "capabilities.json",
+    "dependencies": null,
+    "stringResources": [],
+    "version": "1.0.0.0"
+}
