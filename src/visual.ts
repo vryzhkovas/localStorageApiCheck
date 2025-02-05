@@ -59,7 +59,7 @@ export class Visual implements IVisual {
             status_p.appendChild(status_button);
 
             const status_result_p: HTMLElement = document.createElement("p");
-            status_result_p.appendChild(document.createTextNode("Result:"));
+            status_result_p.appendChild(document.createTextNode("Local storage availability:"));
             const status_result_em: HTMLElement = document.createElement("em");
             this.status_result_text = document.createTextNode("");
             status_result_em.appendChild(this.status_result_text);
@@ -68,6 +68,24 @@ export class Visual implements IVisual {
             status_container.appendChild(status_p);
             status_container.appendChild(status_result_p);
             this.target.appendChild(status_container);
+
+            const set_container = document.createElement("div");
+            const set_p: HTMLElement = document.createElement("p");
+            this.set_name_input = document.createElement("input");
+            this.set_name_input.setAttribute("type", "text");
+            this.set_name_input.setAttribute("placeholder", "Name");
+            this.set_value_input = document.createElement("input");
+            this.set_value_input.setAttribute("type", "text");
+            this.set_value_input.setAttribute("placeholder", "Value");
+            const set_button: HTMLElement = document.createElement("button");
+            set_button.textContent = "Set";
+            set_button.onclick = () => this.onSetButtonClick();
+            set_p.appendChild(this.set_name_input);
+            set_p.appendChild(this.set_value_input);
+            set_p.appendChild(set_button);
+
+            set_container.appendChild(set_p);
+            this.target.appendChild(set_container);
 
             const get_container = document.createElement("div");
             this.get_p = document.createElement("p");
@@ -89,24 +107,6 @@ export class Visual implements IVisual {
             get_container.appendChild(this.get_p);
             get_container.appendChild(get_result_p);
             this.target.appendChild(get_container);
-            
-            const set_container = document.createElement("div");
-            const set_p: HTMLElement = document.createElement("p");
-            this.set_name_input = document.createElement("input");
-            this.set_name_input.setAttribute("type", "text");
-            this.set_name_input.setAttribute("placeholder", "Name");
-            this.set_value_input = document.createElement("input");
-            this.set_value_input.setAttribute("type", "text");
-            this.set_value_input.setAttribute("placeholder", "Value");
-            const set_button: HTMLElement = document.createElement("button");
-            set_button.textContent = "Set";
-            set_button.onclick = () => this.onSetButtonClick();
-            set_p.appendChild(this.set_name_input);
-            set_p.appendChild(this.set_value_input);
-            set_p.appendChild(set_button);
-
-            set_container.appendChild(set_p);
-            this.target.appendChild(set_container);
 
             const remove_container = document.createElement("div");
             const remove_p: HTMLElement = document.createElement("p");
@@ -128,22 +128,24 @@ export class Visual implements IVisual {
 
     public async onGetButtonClick(): Promise<void> {
         try { 
+            console.log(`Get ${this.get_input.value}`);
             let status: PrivilegeStatus = await this.storageV2Service.status(); 
             if (status === PrivilegeStatus.Allowed) { 
                 this.get_result_text.textContent = await this.storageV2Service.get(this.get_input.value);
-                let errorMessage = this.get_p.querySelector(".errorMessage");
-                if (errorMessage) {
-                    errorMessage.remove();
-                }
+                this.removeErrorMessage();
             }
         }
         catch {
-            this.get_p.appendChild(this.createErrorMessage("Error: wrong name"));
-            this.get_result_text.textContent = "";
+            let errorMessage = this.get_p.querySelector(".errorMessage");
+            if (!errorMessage) {
+                this.get_p.appendChild(this.createErrorMessage("Error: wrong name"));
+                this.get_result_text.textContent = "";
+            }
         }
     }
 
     public async onSetButtonClick(): Promise<void> {
+        console.log(`Set key:${this.set_name_input.value} value:${this.set_value_input.value}`);
         let status: PrivilegeStatus = await this.storageV2Service.status(); 
         if (status === PrivilegeStatus.Allowed) {
             await this.storageV2Service.set(this.set_name_input.value, this.set_value_input.value);
@@ -151,9 +153,17 @@ export class Visual implements IVisual {
     }
 
     public async onRemoveButtonClick(): Promise<void> {
+        console.log(`Remove ${this.remove_input.value}`);
         let status: PrivilegeStatus = await this.storageV2Service.status(); 
         if (status === PrivilegeStatus.Allowed) {
             await this.storageV2Service.remove(this.remove_input.value);
+        }
+    }
+
+    public removeErrorMessage() {
+        let errorMessage = this.get_p.querySelector(".errorMessage");
+        if (errorMessage) {
+            errorMessage.remove();
         }
     }
 
@@ -161,6 +171,11 @@ export class Visual implements IVisual {
         let errorMessage = document.createElement("div");
         errorMessage.className = "errorMessage";
         errorMessage.appendChild(document.createTextNode(message));
+        let crossButton = document.createElement("button");
+        crossButton.className = "closeBtn";
+        crossButton.textContent = "X";
+        crossButton.onclick = () => this.removeErrorMessage();
+        errorMessage.appendChild(crossButton);
         return errorMessage;
     }
 

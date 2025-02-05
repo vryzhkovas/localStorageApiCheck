@@ -5,14 +5,14 @@
         "guid": "localStorageApiCheckD4E447D82A0B4BE18EAFC5F8F5D5DC33",
         "visualClassName": "Visual",
         "version": "1.0.0.0",
-        "description": "",
-        "supportUrl": "",
+        "description": "Visual to check local storage api V2",
+        "supportUrl": "*",
         "gitHubUrl": ""
     },
     "apiVersion": "5.8.0",
     "author": {
-        "name": "",
-        "email": ""
+        "name": "Svetlana Ryzhkova",
+        "email": "v-ryzhkovas@microsoft.com"
     },
     "assets": {
         "icon": "assets/icon.png"

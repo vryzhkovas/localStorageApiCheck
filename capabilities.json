@@ -7,5 +7,7 @@
             "name": "LocalStorage",
             "essential": true
         }
-    ]
+    ],
+    "supportsLandingPage": true,
+    "supportsEmptyDataView": true
 }
